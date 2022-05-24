@@ -20,7 +20,6 @@ public class MyRealm extends AuthorizingRealm {
     private LoginAuthService loginAuthService;
     /**
      * 可选方案，基于复杂的token校验，可以选择的重写方法，因为自定义域不支持更多的令牌认证方案。
-     * ChangeLog : 1. 创建 (22/05/23/0023 下午 12:11 [马宇航]);
      * @param token
      * @return boolean
      */
@@ -31,7 +30,6 @@ public class MyRealm extends AuthorizingRealm {
     }
     /**
      * 自定义授权方法，通过用户名查出它的所有角色集合和权限集合，并封装到simpleAuthorizationInfo对象中
-     * ChangeLog : 1. 创建 (22/05/23/0023 下午 4:07 [马宇航]);
      * @param principals 认证方法中，封装进入的 `校长`
      * @return org.apache.shiro.authz.AuthorizationInfo
      */
@@ -51,7 +49,6 @@ public class MyRealm extends AuthorizingRealm {
     }
     /**
      * 认证ok，使用自定义的jwt来进行认证操作
-     * ChangeLog : 1. 创建 (22/05/23/0023 下午 3:11 [马宇航]);
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {

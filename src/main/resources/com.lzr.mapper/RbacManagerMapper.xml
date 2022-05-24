@@ -29,4 +29,23 @@
     <select id="getAll" resultType="RbacManager">
         select id,account,password,status from rbac_manager
     </select>
+<!--    根据用户名查-->
+    <select id="getByName" resultType="RbacManager">
+        select id,account,password,status from rbac_manager WHERE account = #{account}
+    </select>
+<!--    根据用户名查-->
+    <select id="getByCondition" resultType="RbacManager">
+        select id,account,password,status from rbac_manager
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="account != null">
+                AND account like "%"#{account}"%"
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>

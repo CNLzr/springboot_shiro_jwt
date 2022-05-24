@@ -13,7 +13,6 @@ import java.util.Map;
 public class ShiroConfig  {
     /**
      * 配置SecurityManager，然后注入我们的自定义域
-     * ChangeLog : 1. 创建 (22/05/20/0020 下午 5:31 [马宇航]);
      * @param myRealm
      * @return org.apache.shiro.web.mgt.DefaultWebSecurityManager
      */
@@ -30,7 +29,6 @@ public class ShiroConfig  {
     }
     /**
      * 注册我们自定义jwtFilter进入到shiro的过滤器链中
-     * ChangeLog : 1. 创建 (22/05/23/0023 下午 4:00 [马宇航]);
      * @param securityManager
      * @return org.apache.shiro.spring.web.ShiroFilterFactoryBean
      */

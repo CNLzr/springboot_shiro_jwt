@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseMap handle401() {
-        return new ResponseMap(401, "认证没通过，你不配！", null);
+        return new ResponseMap(401, "认证不通过", null);
     }
 
     // 捕捉其他所有异常

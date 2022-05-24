@@ -10,7 +10,6 @@ public class JsonWebToken implements AuthenticationToken {
     }
     /**
      * 校长
-     * ChangeLog : 1. 创建 (22/05/23/0023 上午 11:48 [马宇航]);
      *
      * @return java.lang.Object
      */
@@ -20,7 +19,6 @@ public class JsonWebToken implements AuthenticationToken {
     }
     /**
      * 凭证，它是用来做password认证校验，realm中认证方法中，需要存这个字段！
-     * ChangeLog : 1. 创建 (22/05/23/0023 上午 11:48 [马宇航]);
      *
      * @return java.lang.Object
      */

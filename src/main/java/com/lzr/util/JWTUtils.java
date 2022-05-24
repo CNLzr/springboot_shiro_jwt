@@ -13,46 +13,31 @@ public final class JWTUtils {
     private static String salt = "lzr";//盐，偏量值。增加复杂度
     /**
      * 用于使用动态参数，生成一个token字符串
-     * ChangeLog : 1. 创建 (22/05/20/0020 下午 5:09 [马宇航]);
-     * @param username 存放在claim中，我们后续要解析出来
-     * @param password 用来增加token 生成的复杂度
-     * @return java.lang.String
      */
     public static String sign(String username,String password){
         //加密算法 增加解密难度 //签名算法，用来作为秘钥
-        //                .signWith(SignatureAlgorithm.HS256,"woniuxy");
         Algorithm algorithm = Algorithm.HMAC256(password+salt);
         long now = System.currentTimeMillis();
+        // 建造者模式
         String token = JWT.create()
                 .withClaim("username", username)//在jwt中封装一个用户账号名
-                .withExpiresAt(new Date(now + EXPIRATION))//设置一个过期时间为30分钟的时间
+                .withExpiresAt(new Date(now + EXPIRATION))//设置过期时间,现在时间加上自定义时间
                 .sign(algorithm);//签名算法，比较复杂
         return token;
     }
     /**
      * 传入token返回封装的claim中的username
-     * ChangeLog : 1. 创建 (22/05/20/0020 下午 5:20 [马宇航]);
-     * @param token
-     * @return java.lang.String
      */
     public static String getUserName(String token){
+        System.out.println("token:"+token);
         DecodedJWT decode = JWT.decode(token);
+        System.out.println("decodetoken:"+decode);
+        System.out.println("decodetoken:"+decode.getClaim("username").asString());
         return decode.getClaim("username").asString();
     }
 
-    public static void main(String[] args) {
-        String token = JWTUtils.sign("admin", "123456");
-        System.out.println(token);
-        String userName = JWTUtils.getUserName(token);
-        System.out.println(userName);
-    }
     /**
      * token的校验工具类
-     * ChangeLog : 1. 创建 (22/05/23/0023 下午 2:44 [马宇航]);
-     * @param token
-     * @param username
-     * @param password
-     * @return boolean
      */
     public static boolean verify(String token,String username,String password){
         Algorithm algorithm = Algorithm.HMAC256(password+salt);

@@ -15,6 +15,7 @@ public class LoginAuthController {
 
     @RequestMapping("/login")
     public ResponseMap login(@RequestBody LoginEntity loginEntity){
+        System.out.println(loginEntity.getUsername()+","+loginEntity.getPassword());
         return loginAuthService.login(loginEntity.getUsername(),loginEntity.getPassword());
     }
     @RequestMapping("/401")

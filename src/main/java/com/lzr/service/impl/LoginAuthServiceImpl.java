@@ -5,6 +5,7 @@ import com.lzr.model.RbacManager;
 import com.lzr.service.LoginAuthService;
 import com.lzr.util.JWTUtils;
 import com.lzr.util.ResponseMap;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,9 @@ public class LoginAuthServiceImpl implements LoginAuthService {
 
     @Override
     public ResponseMap login(String username, String password) {
-        RbacManager rbacManager = loginAuthDao.login(username,password);
+        SimpleHash simpleHash = new SimpleHash("MD5",password,username);
+        String newPassword = simpleHash.toBase64();
+        RbacManager rbacManager = loginAuthDao.login(username,newPassword);
         String account = rbacManager.getAccount();
         String password1 = rbacManager.getPassword();
         //调用jwt工具类生成token

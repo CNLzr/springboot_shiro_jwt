@@ -7,10 +7,7 @@ import java.util.Set;
 
 public interface LoginAuthDao {
     RbacManager login(@Param("account") String account,@Param("password") String password);
-
     RbacManager getByName(String username);
-
     Set<String> getRoles(String username);
-
     Set<String> getPermsByName(String username);
 }
