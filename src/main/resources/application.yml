@@ -1,0 +1,20 @@
+server:
+  port: 8088
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rbacdb_ma?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+mybatis:
+  mapper-locations: classpath:com.lzr.mapper/*.xml
+  type-aliases-package: com.lzr.model
+pagehelper:
+#  #合理化配置
+  reasonable: true
+  #mysql方言，会自动帮忙封装分页的效果
+  helper-dialect: mysql
+#  autoRuntimeDialect: true
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql
