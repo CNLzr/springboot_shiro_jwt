@@ -1,7 +1,9 @@
 package com.lzr.service.impl;
 
 import com.lzr.dao.RoleDao;
+import com.lzr.model.Menu;
 import com.lzr.model.Role;
+import com.lzr.model.RoleMenus;
 import com.lzr.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +32,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Integer update(Role role) {
         return roleDao.update(role);
+    }
+
+    @Override
+    public RoleMenus getRoleMenus(Integer roleId) {
+        return roleDao.getRoleMenus(roleId);
     }
 }

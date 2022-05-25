@@ -2,8 +2,10 @@ package com.lzr.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lzr.model.Menu;
 import com.lzr.model.RbacManager;
 import com.lzr.model.Role;
+import com.lzr.model.RoleMenus;
 import com.lzr.service.RbacManagerService;
 import com.lzr.service.RoleService;
 import com.lzr.util.ResponseMap;
@@ -22,7 +24,7 @@ public class RoleController {
 
     @GetMapping("/role/{currentPage}/{pageSize}")
     @RequiresRoles(value={"超级管理员","普通管理员"},logical = Logical.OR)
-    public ResponseMap findAll(@PathVariable int currentPage, @PathVariable int pageSize){
+    public ResponseMap getAll(@PathVariable int currentPage, @PathVariable int pageSize){
         PageHelper.startPage(currentPage,pageSize);
         List<Role> all = roleService.getAll();
         //包含了分页信息的
@@ -50,5 +52,11 @@ public class RoleController {
         Integer i = roleService.deleteById(id);
         if(i>0) return ResponseMap.SUCCESS;
         return ResponseMap.ERROR;
+    }
+
+    @GetMapping("/role/menus/{roleId}")
+    public ResponseMap getRoleMenus(@PathVariable("roleId") Integer roleId){
+        RoleMenus roleMenus = roleService.getRoleMenus(roleId);
+        return new ResponseMap(roleMenus);
     }
 }

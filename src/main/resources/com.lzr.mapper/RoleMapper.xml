@@ -26,7 +26,14 @@
         where id = #{id}
     </update>
 <!--    查-->
+    <resultMap id="roleMenusResult" type="RoleMenus">
+        <id property="roleId" column="id"/>
+        <collection property="menus" column="id" select="com.lzr.dao.MenuDao.getByRoleId"/>
+    </resultMap>
     <select id="getAll" resultType="Role">
         select id,`name`,description,status from rbac_role
+    </select>
+    <select id="getRoleMenus" resultMap="roleMenusResult">
+        select id from rbac_role where id = #{id}
     </select>
 </mapper>

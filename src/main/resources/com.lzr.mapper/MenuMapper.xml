@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzr.dao.MenuDao">
+<!--    增-->
+    <insert id="add">
+        insert into rbac_menu(icon,menuname,url,fid,menuorder) values (#{icon},#{menuname},#{url},#{fid},#{menuorder})
+    </insert>
+<!--    删-->
+    <delete id="deleteById">
+        delete from rbac_menu where id = #{id}
+    </delete>
+<!--    改-->
+    <update id="update" parameterType="Menu">
+        update rbac_menu
+        <set>
+            <if test="icon != null">
+                `icon` = #{icon},
+            </if>
+            <if test="menuname != null">
+                menuname = #{menuname},
+            </if>
+            <if test="url != null">
+                url = #{url}
+            </if>
+            <if test="fid != null">
+                fid = #{fid}
+            </if>
+            <if test="menuorder != null">
+                menuorder = #{menuorder}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+<!--    查-->
+    <resultMap id="menuResult" type="Menu">
+        <id property="id" column="id"/>
+        <result property="icon" column="icon"/>
+        <result property="menuname" column="menuname"/>
+        <result property="url" column="url"/>
+        <collection property="children" column="id" select="getByFid" />
+    </resultMap>
+    <select id="getByFid" resultMap="menuResult">
+        select * from rbac_menu where fid = #{id} ORDER BY menuorder ASC
+    </select>
+    <select id="getAll" resultMap="menuResult">
+        select * from rbac_menu where fid is null ORDER BY menuorder ASC
+    </select>
+    <select id="getById" resultMap="menuResult">
+        select * from rbac_menu where id = #{id}
+    </select>
+    <select id="getAllFatherMenu" resultType="Menu">
+        select * from rbac_menu where fid is null ORDER BY menuorder ASC
+    </select>
+    <select id="getByRoleId" resultMap="menuResult">
+        select c.* from rbac_role_menu b,rbac_menu c
+        where
+        b.menuid = c.id
+        and
+        b.roleid = #{id};
+    </select>
+</mapper>
