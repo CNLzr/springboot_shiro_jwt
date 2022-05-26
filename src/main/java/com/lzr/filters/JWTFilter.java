@@ -23,6 +23,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         // 跨域时会首先发送一个option请求，给option请求直接返回正常状态
         if (httpServletRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {
             httpServletResponse.setStatus(HttpStatus.OK.value());
+            System.out.println("发送option请求");
             return false;
         }
         return super.preHandle(request, response);
@@ -38,7 +39,6 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             } catch (Exception e) {
                 //认证失败，认证失败返回401
                 this.response401(request,response);
-                e.printStackTrace();
             }
         }
         return true;
