@@ -10,7 +10,7 @@
     <select id="getRoles" resultType="java.lang.String">
         select b.`name` from rbac_manager a,rbac_role b
         where
-        a.account = 'aaa'
+        a.account = #{account}
         and
         a.role_id = b.id
     </select>
