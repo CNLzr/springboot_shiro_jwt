@@ -1,6 +1,4 @@
 package com.lzr.model;
-
-
 public class LoginEntity {
     private String username;
     private String password;

@@ -32,8 +32,7 @@ public class LoginAuthServiceImpl implements LoginAuthService {
 
     @Override
     public RbacManager getByName(String userName) {
-        RbacManager rbacManager = loginAuthDao.getByName(userName);
-        return rbacManager;
+        return loginAuthDao.getByName(userName);
     }
 
     @Override

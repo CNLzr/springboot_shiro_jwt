@@ -41,6 +41,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
                 this.response401(request,response);
             }
         }
+        // 没有token返回true放行
         return true;
     }
 
@@ -61,7 +62,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         String token = httpServletRequest.getHeader("Authorization");
         return token!=null;
     }
-    // 执行登录操作，SecurityUtils.getSubject() subject.login
+    // 执行登录操作，等于 SecurityUtils.getSubject() subject.login
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;

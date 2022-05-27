@@ -11,11 +11,20 @@ public class LoginAuthController {
     @Autowired
     private LoginAuthService loginAuthService;
 
+    /**
+     * 登录请求
+     * @param loginEntity
+     * @return
+     */
     @RequestMapping("/login")
     public ResponseMap login(@RequestBody LoginEntity loginEntity){
-        System.out.println(loginEntity.getUsername()+","+loginEntity.getPassword());
         return loginAuthService.login(loginEntity.getUsername(),loginEntity.getPassword());
     }
+
+    /**
+     * 认证失败请求
+     * @return
+     */
     @RequestMapping("/401")
     public ResponseMap response401(){
         return new ResponseMap(401,"认证失败",null);

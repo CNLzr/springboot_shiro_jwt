@@ -1,12 +1,6 @@
 package com.lzr.controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.lzr.model.Menu;
-import com.lzr.model.RbacManager;
 import com.lzr.model.Role;
-import com.lzr.model.RoleMenus;
-import com.lzr.service.RbacManagerService;
 import com.lzr.service.RoleService;
 import com.lzr.util.ResponseMap;
 import org.apache.shiro.authz.annotation.Logical;
@@ -14,49 +8,62 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @CrossOrigin
 @RestController
 public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 查询所有角色请求
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/role/{currentPage}/{pageSize}")
     @RequiresRoles(value={"超级管理员","普通管理员"},logical = Logical.OR)
     public ResponseMap getAll(@PathVariable int currentPage, @PathVariable int pageSize){
-        PageHelper.startPage(currentPage,pageSize);
-        List<Role> all = roleService.getAll();
-        //包含了分页信息的
-        PageInfo<Role> rbacManagerPageInfo = new PageInfo<>(all);
-        return new ResponseMap(rbacManagerPageInfo);
+        return roleService.getAll(currentPage,pageSize);
     }
 
+    /**
+     * 新增角色请求
+     * @param role
+     * @return
+     */
     @PostMapping("/role")
     public ResponseMap add(@RequestBody Role role){
-        Integer i = roleService.add(role);
-        if(i>0) return ResponseMap.SUCCESS;
-        return ResponseMap.ERROR;
+        return roleService.add(role);
     }
 
+    /**
+     * 修改角色请求
+     * @param role
+     * @return
+     */
     @PutMapping("/role")
     public ResponseMap update(@RequestBody Role role){
-        Integer i = roleService.update(role);
-        if(i>0) return ResponseMap.SUCCESS;
-        return ResponseMap.ERROR;
+        return roleService.update(role);
     }
 
+    /**
+     * 删除角色请求
+     * @param id
+     * @return
+     */
     @DeleteMapping("/role/{id}")
 //    @RequiresPermissions(value = {"role:del"})
     public ResponseMap delete(@PathVariable Integer id){
-        Integer i = roleService.deleteById(id);
-        if(i>0) return ResponseMap.SUCCESS;
-        return ResponseMap.ERROR;
+        return roleService.deleteById(id);
     }
 
+    /**
+     * 获取角色所有权限请求
+     * @param roleId
+     * @return
+     */
     @GetMapping("/role/menus/{roleId}")
     public ResponseMap getRoleMenus(@PathVariable("roleId") Integer roleId){
-        RoleMenus roleMenus = roleService.getRoleMenus(roleId);
-        return new ResponseMap(roleMenus);
+        return roleService.getRoleMenus(roleId);
     }
 }

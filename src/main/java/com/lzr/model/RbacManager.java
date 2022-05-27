@@ -1,7 +1,4 @@
 package com.lzr.model;
-
-import lombok.Data;
-
 public class RbacManager {
     private Integer id;
     private String account;

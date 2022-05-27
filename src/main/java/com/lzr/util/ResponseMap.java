@@ -1,7 +1,5 @@
 package com.lzr.util;
-
 import java.util.HashMap;
-
 public final class ResponseMap extends HashMap {
     private final String CODE="code";
     private final String MSG="msg";

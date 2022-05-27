@@ -1,17 +1,12 @@
 package com.lzr.service;
 
-import com.lzr.model.Menu;
-import com.lzr.model.RbacManager;
 import com.lzr.model.Role;
-import com.lzr.model.RoleMenus;
-
-import java.util.List;
+import com.lzr.util.ResponseMap;
 
 public interface RoleService {
-    List<Role> getAll();
-    Integer deleteById(Integer id);
-    Integer add(Role role);
-    Integer update(Role role);
-
-    RoleMenus getRoleMenus(Integer roleId);
+    ResponseMap getAll(Integer currentPage,Integer pageSize);
+    ResponseMap deleteById(Integer id);
+    ResponseMap add(Role role);
+    ResponseMap update(Role role);
+    ResponseMap getRoleMenus(Integer roleId);
 }

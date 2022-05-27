@@ -1,13 +1,14 @@
 package com.lzr.service;
 
 import com.lzr.model.RbacManager;
-
-import java.util.List;
+import com.lzr.util.ResponseMap;
 
 public interface RbacManagerService {
-    List<RbacManager> getAll();
-    List<RbacManager> getByCondtion(RbacManager rbacManager);
-    Integer deleteById(Integer id);
-    Integer add(RbacManager rbacManager);
-    Integer update(RbacManager rbacManager);
+    ResponseMap getAll(Integer currentPage,Integer pageSize);
+    ResponseMap getByCondtion(RbacManager rbacManager);
+    ResponseMap deleteById(Integer id);
+    ResponseMap add(RbacManager rbacManager);
+    ResponseMap update(RbacManager rbacManager);
+    ResponseMap resetPassword(RbacManager rbacManager);
+    ResponseMap setStatus(RbacManager rbacManager);
 }

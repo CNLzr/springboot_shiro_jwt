@@ -1,12 +1,9 @@
 package com.lzr.util;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
-
 import java.util.Date;
-
 public final class JWTUtils {
     //定义过期时间
     private static Long EXPIRATION = 60*60*1000L;
